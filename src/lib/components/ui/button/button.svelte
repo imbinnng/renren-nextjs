@@ -1,5 +1,5 @@
 <script lang="ts" module>
-	import { cn, type WithElementRef } from "$lib/utils.js";
+	import { cn } from "$lib/utils.js";
 	import type { HTMLAnchorAttributes, HTMLButtonAttributes } from "svelte/elements";
 	import { type VariantProps, tv } from "tailwind-variants";
 
@@ -34,8 +34,8 @@
 	export type ButtonVariant = VariantProps<typeof buttonVariants>["variant"];
 	export type ButtonSize = VariantProps<typeof buttonVariants>["size"];
 
-	export type ButtonProps = WithElementRef<HTMLButtonAttributes> &
-		WithElementRef<HTMLAnchorAttributes> & {
+	export type ButtonProps = HTMLButtonAttributes &
+		HTMLAnchorAttributes & {
 			variant?: ButtonVariant;
 			size?: ButtonSize;
 		};
@@ -46,7 +46,6 @@
 		class: className,
 		variant = "default",
 		size = "default",
-		ref = $bindable(null),
 		href = undefined,
 		type = "button",
 		disabled,
@@ -57,8 +56,6 @@
 
 {#if href}
 	<a
-		bind:this={ref}
-		data-slot="button"
 		class={cn(buttonVariants({ variant, size }), className)}
 		href={disabled ? undefined : href}
 		aria-disabled={disabled}
@@ -70,8 +67,6 @@
 	</a>
 {:else}
 	<button
-		bind:this={ref}
-		data-slot="button"
 		class={cn(buttonVariants({ variant, size }), className)}
 		{type}
 		{disabled}

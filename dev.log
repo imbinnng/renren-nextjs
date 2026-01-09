@@ -69,3 +69,37 @@ Google Chrome is requesting /.well-known/appspecific/com.chrome.devtools.json to
 12:09:02 AM [vite] hmr update /src/lib/components/Friends.svelte, /src/app.css
 12:09:16 AM [vite] hmr update /src/lib/components/Friends.svelte, /src/app.css
 12:09:59 AM [vite] hmr update /src/lib/components/Friends.svelte, /src/app.css
+12:25:23 AM [vite] hmr update /src/lib/components/StatusComposer.svelte, /src/app.css
+12:25:32 AM [vite] hmr update /src/lib/components/StatusComposer.svelte, /src/app.css
+12:25:42 AM [vite] hmr update /src/lib/components/StatusComposer.svelte, /src/app.css
+12:25:48 AM [vite] hmr update /src/lib/components/StatusComposer.svelte, /src/app.css
+12:25:50 AM [vite] hmr update /src/lib/components/StatusComposer.svelte, /src/app.css
+12:25:53 AM [vite] hmr update /src/lib/components/StatusComposer.svelte, /src/app.css
+12:25:59 AM [vite] hmr update /src/lib/components/StatusComposer.svelte, /src/app.css
+12:26:02 AM [vite] hmr update /src/lib/components/StatusComposer.svelte, /src/app.css
+12:26:20 AM [vite] hmr update /src/lib/components/StatusComposer.svelte, /src/app.css
+12:26:37 AM [vite] hmr update /src/lib/components/StatusComposer.svelte, /src/app.css
+12:27:31 AM [vite] page reload .svelte-kit/generated/client/app.js
+12:27:53 AM [vite] page reload src/lib/utils.ts
+12:28:38 AM [vite] page reload src/lib/components/ui/button/button.svelte
+12:28:55 AM [vite] hmr update /src/lib/components/StatusComposer.svelte, /src/app.css
+12:29:11 AM [vite] hmr update /src/lib/components/StatusComposer.svelte, /src/app.css
+12:29:11 AM [vite-plugin-svelte] src/lib/components/StatusComposer.svelte:35:6 Self-closing HTML tags for non-void elements are ambiguous — use `<textarea ...></textarea>` rather than `<textarea ... />`
+https://svelte.dev/e/element_invalid_self_closing_tag
+
+[1;31m[500] GET /test[0m
+ReferenceError: Button is not defined
+    at eval (src/routes/test/+page.svelte:130:4)
+    at Renderer.child (node_modules/svelte/src/internal/server/renderer.js:185:18)
+    at Renderer.component (node_modules/svelte/src/internal/server/renderer.js:210:22)
+    at _page (src/routes/test/+page.svelte:9:13)
+    at eval (.svelte-kit/generated/root.svelte:72:7)
+    at Module.slot (node_modules/svelte/src/internal/server/index.js:326:3)
+    at eval (src/routes/+layout.svelte:59:26)
+    at Renderer.child (node_modules/svelte/src/internal/server/renderer.js:185:18)
+    at Renderer.component (node_modules/svelte/src/internal/server/renderer.js:210:22)
+    at _layout (src/routes/+layout.svelte:12:13)
+12:29:29 AM [vite] page reload src/routes/test/+page.svelte
+12:29:29 AM [vite] page reload .svelte-kit/generated/client/app.js
+12:29:30 AM [vite-plugin-svelte] src/lib/components/StatusComposer.svelte:35:6 Self-closing HTML tags for non-void elements are ambiguous — use `<textarea ...></textarea>` rather than `<textarea ... />`
+https://svelte.dev/e/element_invalid_self_closing_tag
