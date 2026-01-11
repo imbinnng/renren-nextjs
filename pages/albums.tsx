@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../src/components/ui/card';
+import Header from '../src/components/Header';
 
 const AlbumsPage: React.FC = () => {
   const albums = [
@@ -52,31 +53,24 @@ const AlbumsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--renren-bg)' }}>
-      <header className="bg-white border-b border-gray-200" style={{ borderColor: 'var(--renren-border)' }}>
-        <div className="max-w-6xl mx-auto p-4">
+      <Header 
+        title="📷 我的相册"
+        actions={
           <div className="flex items-center space-x-4">
-            <a href="/" className="text-blue-600 hover:text-blue-800 font-medium">
-              ← 返回首页
-            </a>
-            <h1 className="text-2xl font-bold" style={{ color: '#111827' }}>
-              📷 我的相册
-            </h1>
-            <div className="flex items-center space-x-4">
-              <button className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white">
-                上传照片
-              </button>
-              <button className="px-4 py-2 rounded-lg border border-gray-200 hover:bg-gray-50">
-                创建相册
-              </button>
-            </div>
+            <button className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white">
+              上传照片
+            </button>
+            <button className="px-4 py-2 rounded-lg border border-gray-200 hover:bg-gray-50">
+              创建相册
+            </button>
           </div>
-        </div>
-      </header>
+        }
+      />
 
       <div className="max-w-6xl mx-auto p-4">
         <div className="mb-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold" style={{ color: '#111827' }}>
+            <h2 className="text-2xl font-semibold" style={{ color: '#111827' }}>
               全部相册 ({albums.length})
             </h2>
             <div className="flex items-center space-x-4">

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
+import Header from '../src/components/Header';
 
 const SharePage: React.FC = () => {
-  const [shareItems] = useState([
+  const shareItems = [
     {
       id: 1,
       author: '张小明',
@@ -34,156 +35,100 @@ const SharePage: React.FC = () => {
       comments: 23,
       shares: 15,
       createdAt: '4小时前'
+    },
+    {
+      id: 4,
+      author: '赵美丽',
+      avatar: '赵',
+      content: '分享一个很棒的学习方法：番茄工作法！专注25分钟，休息5分钟，效率提高很多 🍅',
+      imageUrl: 'https://picsum.photos/seed/share4/600/400.jpg',
+      likes: 67,
+      comments: 8,
+      shares: 12,
+      createdAt: '5小时前'
+    },
+    {
+      id: 5,
+      author: '刘强东',
+      avatar: '刘',
+      content: '分享一个有趣的生活小技巧：如何让衣服更持久保持色彩鲜艳！👔',
+      imageUrl: 'https://picsum.photos/seed/share5/600/400.jpg',
+      likes: 34,
+      comments: 6,
+      shares: 5,
+      createdAt: '6小时前'
     }
-  ]);
-
-  const commonEmojis = ['😊', '😂', '❤️', '👍', '🎉', '🔥', '💯', '🎁', '🌟', '✨', '🎨', '🎭'];
+  ];
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--renren-bg)' }}>
-      <header className="bg-white border-b border-gray-200" style={{ borderColor: 'var(--renren-border)' }}>
-        <div className="max-w-6xl mx-auto p-4">
+      <Header 
+        title="🔄 分享新鲜事"
+        actions={
           <div className="flex items-center space-x-4">
-            <a href="/" className="text-blue-600 hover:text-blue-800 font-medium">
-              ← 返回首页
-            </a>
-            <h1 className="text-2xl font-bold" style={{ color: '#111827' }}>
-              🔄 分享新鲜事
-            </h1>
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-500">{shareItems.length} 条分享</span>
-              <select className="px-3 py-2 border border-gray-200 rounded-lg" style={{ borderColor: 'var(--renren-border)' }}>
-                <option value="all">全部</option>
-                <option value="life">生活</option>
-                <option value="work">工作</option>
-                <option value="study">学习</option>
-              </select>
-            </div>
+            <span className="text-sm text-gray-500">{shareItems.length} 条分享</span>
+            <select className="px-3 py-2 border border-gray-200 rounded-lg" style={{ borderColor: 'var(--renren-border)' }}>
+              <option value="all">全部</option>
+              <option value="life">生活</option>
+              <option value="work">工作</option>
+              <option value="study">学习</option>
+              <option value="travel">旅行</option>
+              <option value="food">美食</option>
+            </select>
           </div>
-        </div>
-      </header>
+        }
+      />
 
       <div className="max-w-6xl mx-auto p-4">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <div className="text-lg font-semibold mb-4" style={{ color: '#111827' }}>
-                发布新鲜事
-              </div>
-              <div className="space-y-4">
-                <input
-                  type="text"
-                  placeholder="标题"
-                  className="w-full p-3 border rounded-lg"
-                  style={{ borderColor: 'var(--renren-border)' }}
-                />
-                <textarea
-                  placeholder="分享你的新鲜事..."
-                  className="w-full p-3 border rounded-lg resize-none"
-                  style={{ borderColor: 'var(--renren-border)' }}
-                  rows={4}
-                />
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="text"
-                    placeholder="图片URL(可选)"
-                    className="flex-1 p-3 border rounded-lg"
-                    style={{ borderColor: 'var(--renren-border)' }}
-                  />
-                  <select className="px-3 py-2 border rounded-lg" style={{ borderColor: 'var(--renren-border)' }}>
-                    <option value="text">文字</option>
-                    <option value="image">图片</option>
-                    <option value="video">视频</option>
-                    <option value="link">链接</option>
-                  </select>
-                </div>
-                
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm text-gray-600">类型：</span>
-                  <select className="px-3 py-2 border rounded-lg" style={{ borderColor: 'var(--renren-border)' }}>
-                    <option value="life">生活</option>
-                    <option value="work">工作</option>
-                    <option value="study">学习</option>
-                  </select>
-                </div>
-                
-                <div>
-                  <div className="text-sm text-gray-600 mb-2">添加表情符号：</div>
-                  <div className="grid grid-cols-8 gap-2">
-                    {commonEmojis.map((emoji, index) => (
-                      <button
-                        key={index}
-                        type="button"
-                        className="p-2 hover:bg-gray-100 rounded text-lg transition-colors"
-                      >
-                        {emoji}
-                      </button>
-                    ))}
+        <div className="space-y-6">
+          <h2 className="text-xl font-bold" style={{ color: '#111827' }}>
+            最新分享
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {shareItems.map((item) => (
+              <div key={item.id} className="bg-white rounded-lg border border-gray-200 p-6">
+                <div className="flex items-start space-x-3 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+                    {item.avatar}
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center space-x-2 mb-1">
+                      <h4 className="font-semibold">{item.author}</h4>
+                      <span className="text-sm text-gray-500">{item.createdAt}</span>
+                    </div>
                   </div>
                 </div>
                 
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-500">0/500</span>
-                  <button className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium">
-                    发布分享
+                {item.imageUrl && (
+                  <div className="w-full h-64 rounded-lg overflow-hidden mb-4">
+                    <img 
+                      src={item.imageUrl} 
+                      alt={item.content}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
+                
+                <p className="text-gray-800 leading-relaxed mb-4">
+                  {item.content}
+                </p>
+                
+                <div className="flex items-center space-x-6">
+                  <button className="flex items-center space-x-1 text-gray-500 hover:text-red-500">
+                    <span>❤️</span>
+                    <span>{item.likes}</span>
+                  </button>
+                  <button className="flex items-center space-x-1 text-gray-500 hover:text-blue-500">
+                    <span>💬</span>
+                    <span>{item.comments}</span>
+                  </button>
+                  <button className="flex items-center space-x-1 text-gray-500 hover:text-green-500">
+                    <span>🔄</span>
+                    <span>{item.shares}</span>
                   </button>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-2">
-            <div className="space-y-4">
-              <h2 className="text-xl font-bold mb-6" style={{ color: '#111827' }}>
-                最新分享
-              </h2>
-              <div className="space-y-4">
-                {shareItems.map((item) => (
-                  <div key={item.id} className="bg-white rounded-lg border border-gray-200 p-6">
-                    <div className="flex items-start space-x-3">
-                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-full flex items-center justify-center font-bold">
-                        {item.avatar}
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-2 mb-1">
-                          <h4 className="font-semibold">{item.author}</h4>
-                          <span className="text-sm text-gray-500">{item.createdAt}</span>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {item.imageUrl && (
-                      <div className="w-full h-48 rounded-lg overflow-hidden mb-3">
-                        <img 
-                          src={item.imageUrl} 
-                          alt={item.content}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    )}
-                    
-                    <p className="text-gray-800 leading-relaxed mb-4">
-                      {item.content}
-                    </p>
-                    
-                    <div className="flex items-center space-x-6">
-                      <button className="flex items-center space-x-1 text-gray-500 hover:text-red-500">
-                        <span>❤️</span>
-                        <span>{item.likes}</span>
-                      </button>
-                      <button className="flex items-center space-x-1 text-gray-500 hover:text-blue-500">
-                        <span>💬</span>
-                        <span>{item.comments}</span>
-                      </button>
-                      <button className="flex items-center space-x-1 text-gray-500 hover:text-green-500">
-                        <span>🔄</span>
-                        <span>{item.shares}</span>
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

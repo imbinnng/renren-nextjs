@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardContent } from '../src/components/ui/card';
+import Header from '../src/components/Header';
 
 const friendsData = [
   {
@@ -67,108 +68,75 @@ const friendsData = [
 const FriendsPage: React.FC = () => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--renren-bg)' }}>
+      <Header 
+        title="👥 我的好友"
+        actions={
+          <div className="flex items-center space-x-4">
+            <span className="text-sm text-gray-500">{friendsData.length} 位好友</span>
+            <input
+              type="text"
+              placeholder="搜索好友..."
+              className="px-3 py-2 border border-gray-200 rounded-lg"
+              style={{ borderColor: 'var(--renren-border)' }}
+            />
+          </div>
+        }
+      />
+
       <div className="max-w-6xl mx-auto p-4">
-        <div className="flex gap-6">
-          {/* 左侧导航 */}
-          <div className="w-64 hidden lg:block">
-            <Card className="p-4">
-              <nav className="space-y-1">
-                <a href="/" className="w-full text-left px-3 py-2 rounded hover:bg-gray-100 flex items-center space-x-2 block">
-                  <span>🏠</span>
-                  <span>首页</span>
-                </a>
-                <button 
-                  className="w-full text-left px-3 py-2 rounded flex items-center space-x-2" 
-                  style={{ backgroundColor: 'var(--renren-blue)', color: 'white' }}
+        <div className="mb-6">
+          <h2 className="text-2xl font-semibold mb-4" style={{ color: '#111827' }}>
+            好友列表
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {friendsData.map((friend) => (
+            <Card key={friend.id} className="renren-card p-4">
+              <div className="flex items-start space-x-4">
+                <div 
+                  className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold"
+                  style={{ backgroundImage: `linear-gradient(to bottom right, ${friend.avatarColor})` }}
                 >
-                  <span>👥</span>
-                  <span>好友</span>
-                </button>
-                <a href="/albums" className="w-full text-left px-3 py-2 rounded hover:bg-gray-100 flex items-center space-x-2 block">
-                  <span>📷</span>
-                  <span>相册</span>
-                </a>
-                <a href="/blogs" className="w-full text-left px-3 py-2 rounded hover:bg-gray-100 flex items-center space-x-2 block">
-                  <span>📝</span>
-                  <span>日志</span>
-                </a>
-                <a href="/share" className="w-full text-left px-3 py-2 rounded hover:bg-gray-100 flex items-center space-x-2 block">
-                  <span>🔄</span>
-                  <span>分享</span>
-                </a>
-              </nav>
-            </Card>
-
-            <Card className="p-4">
-              <h3 className="font-bold mb-3">好友搜索</h3>
-              <input
-                type="text"
-                placeholder="搜索好友..."
-                className="w-full p-2 border rounded-lg"
-                style={{ borderColor: 'var(--renren-border)' }}
-              />
-            </Card>
-          </div>
-
-          {/* 右侧好友列表 */}
-          <div className="flex-1">
-            <div className="mb-6">
-              <h2 className="text-2xl font-bold mb-4">好友列表</h2>
-              <div className="text-sm text-gray-600 mb-4">
-                共 {friendsData.length} 位好友
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {friendsData.map((friend) => (
-                <Card key={friend.id} className="renren-card p-4">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold"
-                         style={{ backgroundImage: `linear-gradient(to bottom right, ${friend.avatarColor.split(' ').map(c => c.startsWith('from') ? c.replace('from', 'from').replace('to', 'to') : c).join(', ')})` }}
-                    >
-                      {friend.avatar}
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold">{friend.name}</h3>
-                      <p className="text-sm text-gray-500">{friend.username}</p>
-                      <div className="flex items-center space-x-2 mt-1">
-                        <div className={`w-2 h-2 rounded-full ${friend.status === 'online' ? 'bg-green-500' : 'bg-gray-400'}`}></div>
-                        <span className="text-sm text-gray-500">
-                          {friend.status === 'online' ? '在线' : '离线'}
-                        </span>
-                        <span className="text-xs text-gray-500">· {friend.mutualFriends} 个共同好友</span>
-                      </div>
-                      <p className="text-sm text-gray-700 mt-2 line-clamp-2">
-                        {friend.bio}
-                      </p>
-                      <div className="flex gap-2 mt-3">
-                        <button 
-                          size="sm" 
-                          variant="outline"
-                          className="flex-1"
-                        >
-                          发消息
-                        </button>
-                        <button 
-                          size="sm" 
-                          variant="outline"
-                          className="flex-1"
-                        >
-                          查看主页
-                        </button>
-                        <button 
-                          size="sm"
-                          className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
-                        >
-                          加好友
-                        </button>
-                      </div>
-                    </div>
+                  {friend.avatar}
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold">{friend.name}</h3>
+                  <p className="text-sm text-gray-500">{friend.username}</p>
+                  <div className="flex items-center space-x-2 mt-1">
+                    <div className={`w-2 h-2 rounded-full ${friend.status === 'online' ? 'bg-green-500' : 'bg-gray-400'}`}></div>
+                    <span className="text-sm text-gray-500">
+                      {friend.status === 'online' ? '在线' : '离线'}
+                    </span>
+                    <span className="text-xs text-gray-500">· {friend.mutualFriends} 个共同好友</span>
                   </div>
-                </Card>
-              ))}
-            </div>
-          </div>
+                  <p className="text-sm text-gray-700 mt-2 line-clamp-2">
+                    {friend.bio}
+                  </p>
+                  <div className="flex gap-2 mt-3">
+                    <button 
+                      size="sm" 
+                      className="px-3 py-1 text-sm border border-gray-200 rounded hover:bg-gray-50"
+                    >
+                      发消息
+                    </button>
+                    <button 
+                      size="sm"
+                      className="px-3 py-1 text-sm border border-gray-200 rounded hover:bg-gray-50"
+                    >
+                      查看主页
+                    </button>
+                    <button 
+                      size="sm"
+                      className="px-3 py-1 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded"
+                    >
+                      加好友
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          ))}
         </div>
       </div>
     </div>

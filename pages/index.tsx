@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card } from '../src/components/ui/card';
 import { Button } from '../src/components/ui/button';
 import Avatar from '../src/components/ui/avatar';
+import Header from '../src/components/Header';
 
 const HomePage: React.FC = () => {
   const [showEmoji, setShowEmoji] = useState(false);
@@ -12,6 +13,14 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--renren-bg)' }}>
+      <Header 
+        title="🏠 人人网"
+        actions={
+          <div className="flex items-center space-x-4">
+            <span className="text-sm text-gray-500">欢迎来到人人网</span>
+          </div>
+        }
+      />
       <div className="max-w-6xl mx-auto p-4">
         <div className="flex gap-6">
           {/* 左侧导航栏 */}
