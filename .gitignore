@@ -20,6 +20,7 @@ dist/
 .eslintcache
 .parcel-cache/
 .vite/
+npm-cache
 
 # IDE
 .vscode/
