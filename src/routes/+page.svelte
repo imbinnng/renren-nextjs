@@ -12,19 +12,19 @@
   let selectedFeed: any = null;
   let showDetail = false;
 
-  function openFeed(feed: any) {
+  const openFeed = (feed: any) => {
     selectedFeed = feed;
     showDetail = true;
-  }
+  };
 
-  function closeDetail() {
+  const closeDetail = () => {
     showDetail = false;
     selectedFeed = null;
-  }
+  };
 
-  function refreshFeed() {
+  const refreshFeed = () => {
     console.log('Refreshing feed');
-  }
+  };
 </script>
 
 {#if showDetail && selectedFeed}
