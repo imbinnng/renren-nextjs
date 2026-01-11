@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../src/components/Header';
 import { Card, CardContent } from '../src/components/ui/card';
 import { Avatar, AvatarFallback } from '../src/components/ui/avatar';
 import PageHeader from '../src/components/PageHeader';
 
 const MessagesPage: React.FC = () => {
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  
   const conversations = [
     {
       id: 1,
@@ -89,9 +95,19 @@ const MessagesPage: React.FC = () => {
                   </div>
                   <p className="text-gray-800 mt-2">{conversation.content}</p>
                   <div className="flex justify-end mt-2 items-center space-x-4 text-sm text-gray-500">
-                    <span>❤️ {Math.floor(Math.random() * 50) + 20}</span>
-                    <span>💬 {Math.floor(Math.random() * 20) + 5}</span>
-                    <span>🔄 {Math.floor(Math.random() * 10) + 2}</span>
+                    {mounted ? (
+                      <>
+                        <span>❤️ {Math.floor(Math.random() * 50) + 20}</span>
+                        <span>💬 {Math.floor(Math.random() * 20) + 5}</span>
+                        <span>🔄 {Math.floor(Math.random() * 10) + 2}</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>❤️ --</span>
+                        <span>💬 --</span>
+                        <span>🔄 --</span>
+                      </>
+                    )}
                   </div>
                 </CardContent>
               </Card>
