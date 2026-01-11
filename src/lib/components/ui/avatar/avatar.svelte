@@ -1,19 +1,14 @@
 <script lang="ts">
-	import { Avatar as AvatarPrimitive } from "bits-ui";
-	import { cn } from "$lib/utils.js";
-
-	let {
-		ref = $bindable(null),
-		loadingStatus = $bindable("loading"),
-		class: className,
-		...restProps
-	}: AvatarPrimitive.RootProps = $props();
+	export let loadingStatus = "loading";
+	export let className = "";
+	export let ref: HTMLDivElement;
 </script>
 
-<AvatarPrimitive.Root
-	bind:ref
-	bind:loadingStatus
+<div
+	bind:this={ref}
 	data-slot="avatar"
-	class={cn("relative flex size-8 shrink-0 overflow-hidden rounded-full", className)}
-	{...restProps}
-/>
+	data-status={loadingStatus}
+	class="relative flex size-8 shrink-0 overflow-hidden rounded-full {className}"
+>
+	<slot />
+</div>
