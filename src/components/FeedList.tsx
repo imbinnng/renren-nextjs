@@ -1,7 +1,7 @@
 import React from 'react';
-import { Avatar, AvatarFallback } from '../ui/avatar';
-import { Button } from '../ui/button';
-import { Card, CardContent } from '../ui/card';
+import { Avatar, AvatarFallback } from '../avatar';
+import { Button } from '../button';
+import { Card, CardContent } from '../card';
 
 interface Feed {
   id: string;
