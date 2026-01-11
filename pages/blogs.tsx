@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { Card, CardContent, CardHeader, CardTitle } from '../src/components/ui/card';
 import Header from '../src/components/Header';
 import PageHeader from '../src/components/PageHeader';
@@ -142,6 +143,11 @@ const getCategoryColor = (category: string) => {
 };
 
 const BlogsPage: React.FC = () => {
+  const router = useRouter();
+  
+  const handleBlogClick = (blogId: number) => {
+    router.push(`/blogs/${blogId}`);
+  };
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--renren-bg)' }}>
       <Header 
@@ -178,7 +184,11 @@ const BlogsPage: React.FC = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {blogs.map((blog) => (
-            <Card key={blog.id} className="renren-card hover:shadow-lg transition-shadow cursor-pointer">
+            <Card 
+              key={blog.id} 
+              className="renren-card hover:shadow-lg transition-shadow cursor-pointer"
+              onClick={() => handleBlogClick(blog.id)}
+            >
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between mb-2">
                   <span className={`px-2 py-1 rounded text-xs ${getCategoryColor(blog.category)}`}>

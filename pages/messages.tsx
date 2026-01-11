@@ -72,7 +72,7 @@ const MessagesPage: React.FC = () => {
           <div className="lg:col-span-1 space-y-4">
             <h3 className="text-lg font-bold text-gray-900 mb-4">对话</h3>
             {conversations.map((conversation) => (
-              <Card key={conversation.id} className={`cursor-pointer hover:shadow-lg transition-shadow ${conversation.unread ? 'ring-2 ring-blue-500' : ''}`}>
+              <Card key={conversation.id} className={`cursor-pointer hover:shadow-lg transition-shadow`}>
                 <CardContent className="p-4">
                   <div className="flex items-start space-x-3 space-y-2">
                     <Avatar className="w-10 h-10">
