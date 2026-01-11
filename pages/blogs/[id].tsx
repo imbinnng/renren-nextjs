@@ -15,6 +15,7 @@ const BlogDetailPage: React.FC = () => {
   const [newComment, setNewComment] = useState('');
   const [likeCount, setLikeCount] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
+  const [copiedBlock, setCopiedBlock] = useState<string | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -66,6 +67,96 @@ const BlogDetailPage: React.FC = () => {
       setComments(prev => [comment, ...prev]);
       setNewComment('');
     }
+  };
+
+  const renderContent = (content: string) => {
+    const lines = content.split('\n');
+    const elements: JSX.Element[] = [];
+    let currentBlock: string[] = [];
+    let inCodeBlock = false;
+    let blockLanguage = '';
+
+    lines.forEach((line, index) => {
+      // 检测代码块开始
+      if (line.trim().startsWith('```')) {
+        if (!inCodeBlock) {
+          // 代码块开始
+          inCodeBlock = true;
+          blockLanguage = line.trim().replace('```', '');
+        } else {
+          // 代码块结束
+          inCodeBlock = false;
+          
+          // 渲染代码块
+          elements.push(
+            <div key={`code-${index}`} className="relative mb-6">
+              <div className="flex items-center justify-between bg-gray-800 text-gray-300 px-4 py-2 text-sm font-mono rounded-t-lg border-t border-l border-r border-gray-700">
+                <span className="text-xs font-semibold">{blockLanguage || 'plaintext'}</span>
+                <button
+                  onClick={() => {
+                    const codeToCopy = currentBlock.join('\n');
+                    navigator.clipboard.writeText(codeToCopy);
+                    setCopiedBlock(`code-${index}`);
+                    setTimeout(() => setCopiedBlock(null), 2000);
+                  }}
+                  className={`text-xs px-2 py-1 rounded transition-all text-gray-300 ${
+                    copiedBlock === `code-${index}` 
+                      ? 'bg-green-600 hover:bg-green-700' 
+                      : 'bg-gray-700 hover:bg-gray-600'
+                  }`}
+                >
+                  {copiedBlock === `code-${index}` ? '已复制!' : '复制代码'}
+                </button>
+              </div>
+              <pre className="bg-gray-900 text-gray-100 p-4 rounded-b-lg overflow-x-auto border-b border-l border-r border-gray-700">
+                <code className="text-sm font-mono leading-relaxed block">
+                  {currentBlock.map((codeLine, lineIndex) => (
+                    <div key={lineIndex} className="flex">
+                      <span className="text-gray-500 mr-4 select-none text-right" style={{ minWidth: '2rem' }}>
+                        {lineIndex + 1}
+                      </span>
+                      <span className="flex-1">{codeLine || ' '}</span>
+                    </div>
+                  ))}
+                </code>
+              </pre>
+            </div>
+          );
+          
+          currentBlock = [];
+          blockLanguage = '';
+        }
+      } else if (inCodeBlock) {
+        // 代码块内容
+        currentBlock.push(line);
+      } else if (line.trim() === '') {
+        // 空行
+        elements.push(<div key={`br-${index}`} className="h-4" />);
+      } else {
+        // 普通段落，支持内联代码
+        const processedLine = line.split(/(`+[^`]+`+)/).map((part, partIndex) => {
+          if (part.startsWith('`') && part.endsWith('`')) {
+            // 内联代码
+            return (
+              <code key={`inline-${partIndex}`} className="bg-gray-100 text-gray-800 px-1 py-0.5 rounded text-sm font-mono">
+                {part.replace(/`/g, '')}
+              </code>
+            );
+          } else {
+            // 普通文本
+            return part;
+          }
+        });
+
+        elements.push(
+          <p key={`p-${index}`} className="mb-4 leading-relaxed text-gray-700">
+            {processedLine}
+          </p>
+        );
+      }
+    });
+
+    return elements;
   };
 
   const getCategoryColor = (category: string) => {
@@ -158,12 +249,8 @@ const BlogDetailPage: React.FC = () => {
               </div>
             </div>
             
-            <div className="prose max-w-none">
-              {blog.content.split('\n').map((paragraph: string, index: number) => (
-                <p key={index} className="mb-4 leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
+            <div className="prose prose-gray max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-strong:text-gray-900 prose-code:text-pink-600 prose-pre:bg-gray-900">
+              {renderContent(blog.content)}
             </div>
           </CardContent>
         </Card>
