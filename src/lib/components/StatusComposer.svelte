@@ -25,7 +25,7 @@
   }
 </script>
 
-<div class="mb-4 bg-white rounded-lg border border-gray-200 p-4">
+<div class="mb-4 bg-white">
   <div class="flex space-x-3">
     <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
       我
